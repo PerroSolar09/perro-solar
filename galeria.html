@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Galería | Perro Solar</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/galeria.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+    <a href="index.html" aria-label="Inicio">
+
+        <img
+            src="images/logo/perro-solar-logo.png"
+            alt="Perro Solar">
+
+    </a>
+
+</div>
+
+<nav>
+
+    <a href="historia.html">Historia</a>
+
+    <a href="musica.html">Música</a>
+
+    <a href="galeria.html">Galería</a>
+
+    <a href="conciertos.html">Conciertos</a>
+
+    <a href="contacto.html">Contacto</a>
+
+</nav>
+
+</header>
+
+<section class="gallery-hero">
+
+<h1>EN VIVO</h1>
+
+<p>
+Cada concierto cuenta una historia.
+</p>
+
+</section>
+
+
+<main class="events">
+
+       <article class="concert-card">
+
+        <img
+        class="event-poster"
+        src="images/flyers/Vfw.jpg"
+        alt="VFW"
+
+         data-gallery="
+        images/galeria/Vfw/01.jpg,
+        images/galeria/Vfw/02.jpg,
+        images/galeria/Vfw/03.jpg,
+        images/galeria/Vfw/04.jpg,
+        images/galeria/Vfw/05.jpg">
+
+        <h3>VFW</h3>
+
+        <p>Minneapolis · Minnesota</p>
+
+        <span>18 Octubre 2024</span>
+
+    </article>
+
+      <article class="concert-card">
+
+        <img
+        class="event-poster"
+        src="images/flyers/Barzia.jpg"
+        alt="BarZia"
+
+        data-gallery="
+        images/galeria/BarZia/01.jpg,
+        images/galeria/BarZia/02.jpg,
+        images/galeria/BarZia/03.jpg,
+        images/galeria/BarZia/04.jpg,
+        images/galeria/BarZia/05.jpg">
+
+        <h3>BARZIA</h3>
+
+        <p>Minneapolis · Minnesota</p>
+
+        <span>11 Mayo 2025</span>
+
+    </article>
+
+<article class="concert-card">
+
+        <img
+        class="event-poster"
+        src="images/flyers/Driftwood_Char_Bar.jpg"
+        alt="Driftwood_Cha-Bar"
+
+        data-gallery="
+        images/galeria/Driftwood_Char_Bar/01.jpg,
+        images/galeria/Driftwood_Char_Bar/02.jpg,
+        images/galeria/Driftwood_Char_Bar/03.jpg,
+        images/galeria/Driftwood_Char_Bar/04.jpg,
+        images/galeria/Driftwood_Char_Bar/05.jpg">
+
+        <h3>DRIFTWOOD CHAR BAR</h3>
+
+        <p>Minneapolis · Minnesota</p>
+
+        <span>31 Julio 2025</span>
+
+    </article>
+
+    <article class="concert-card">
+
+        <img
+        class="event-poster"
+        src="images/flyers/Underground.jpg"
+        alt="Underground Music Venue"
+
+        data-gallery="
+        images/galeria/underground/01.jpg,
+        images/galeria/underground/02.jpg,
+        images/galeria/underground/03.jpg"
+  >
+
+        <h3>UNDERGROUND MUSIC VENUE</h3>
+
+        <p>Minneapolis · Minnesota</p>
+
+        <span>13 Septiembre 2025</span>
+
+    </article>
+   
+    <article class="concert-card">
+
+        <img
+        class="event-poster"
+        src="images/flyers/Driftwood31.jpg"
+        alt="Driftwood Char Bar"
+
+        data-gallery="
+        images/galeria/Driftwood 31:10/01.jpg,
+        images/galeria/Driftwood 31:10/02.jpg,
+        images/galeria/Driftwood 31:10/03.jpg"
+        >
+
+        <h3>DRIFTWOOD CHAR BAR</h3>
+
+        <p>Minneapolis · Minnesota</p>
+
+        <span>29 Octubre 2025</span>
+
+    </article>
+
+</main>
+
+<!-- LIGHTBOX -->
+
+<div class="lightbox" id="lightbox">
+
+    <span class="close">&times;</span>
+
+    <button class="prev">&#10094;</button>
+
+    <img class="lightbox-image" src="" alt="">
+
+    <button class="next">&#10095;</button>
+
+</div>
+
+<script src="js/galeria.js"></script>
+
+</body>
+
+</html>

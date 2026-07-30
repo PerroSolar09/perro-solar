@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <head>
 
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Perro Solar | Rock Hispanoamericano</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -20,58 +21,84 @@
 
 <body>
 
-   <header>
+    <header>
 
-    <div class="logo">
+       <div class="logo">
 
-    <img
-        src="images/logo/perro-solar-logo.png"
-        alt="Perro Solar">
+    <a href="index.html" aria-label="Inicio">
+
+        <img
+            src="images/logo/perro-solar-logo.png"
+            alt="Perro Solar">
+
+    </a>
 
 </div>
 
-    <nav>
+       <nav>
 
-        <a href="#">Historia</a>
-        <a href="#">Música</a>
-        <a href="#">Galería</a>
-        <a href="#">Conciertos</a>
-        <a href="#">Contacto</a>
+    <a href="historia.html">Historia</a>
 
-    </nav>
+    <a href="musica.html">Música</a>
 
-</header>
+    <a href="galeria.html">Galería</a>
 
-<section class="hero">
+    <a href="conciertos.html">Conciertos</a>
 
-    <div class="hero-content">
+    <a href="contacto.html">Contacto</a>
 
-        <p class="fade-up">Rock Hispanoamericano</p>
+</nav>
 
-    <h1 class="fade-up">
-        Silencio al volver
-    </h1>
+    </header>
 
-    <p class="fade-up">
-        El primer sencillo de Perro Solar.
-    </p>
+    <section class="hero">
 
-    <div class="buttons fade-up">
+        <img
+            src="images/Banda/front.png"
+            alt="Perro Solar en vivo"
+            class="hero-image">
 
-            <a href="#" class="btn-principal">
-                Escuchar ahora
-            </a>
+        <div class="hero-content">
 
-            <a href="#" class="btn-secundario">
-                Conocer la banda
-            </a>
+            <div class="hero-info fade-up">
+
+                <span class="hero-location">
+                    Bogotá · Colombia
+                </span>
+
+                <span class="hero-divider"></span>
+
+                <span class="hero-subtitle">
+                    Rock Hispanoamericano
+                </span>
+
+            </div>
+
+            <h1 class="fade-up">
+                Silencio al volver
+            </h1>
+
+            <p class="fade-up">
+                El primer sencillo de Perro Solar.
+            </p>
+
+            <div class="botones fade-up">
+
+                <a href="#" class="btn-principal">
+                    Escuchar ahora
+                </a>
+
+                <a href="historia.html" class="btn-secundario">
+    Conocer la banda
+</a>
+            </div>
 
         </div>
 
-    </div>
+    </section>
 
-</section>
-<script src="js/script.js"></script>
+    <script src="js/script.js"></script>
+
 </body>
 
 </html>

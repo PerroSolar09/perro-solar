@@ -1,66 +1,177 @@
-/*=========================
+/*==================================================
+PERRO SOLAR
+Style Sheet
+====================================================*/
+
+
+/*==================================================
 RESET
-=========================*/
-body{
+====================================================*/
 
-    font-family:"Inter",sans-serif;
+*,
+*::before,
+*::after{
 
-}
-
-*{
     margin:0;
     padding:0;
     box-sizing:border-box;
+
 }
 
-/*=========================
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+img{
+
+    display:block;
+    max-width:100%;
+
+}
+
+a{
+
+    color:inherit;
+    text-decoration:none;
+
+}
+
+button{
+
+    border:none;
+    background:none;
+    font:inherit;
+    cursor:pointer;
+
+}
+
+
+/*==================================================
 VARIABLES
-=========================*/
+====================================================*/
 
 :root{
 
+    /* Colores */
+
     --negro:#090909;
 
-    --dorado:#C89A4A;
+    --negro-profundo:#050505;
 
-    --gris:#B5B5B5;
+    --gris:#b5b5b5;
 
-    --blanco:#F7F7F7;
+    --gris-claro:#d6d6d6;
+
+    --blanco:#f7f7f7;
+
+    --dorado:#c89a4a;
+
+    --dorado-claro:#e2bc70;
+
+    /* Tipografía */
+
+    --titulo:'Cinzel',serif;
+
+    --texto:'Inter',sans-serif;
+
+    /* Espaciados */
+
+    --space-xs:8px;
+
+    --space-sm:16px;
+
+    --space-md:32px;
+
+    --space-lg:64px;
+
+    --space-xl:96px;
+
+    --space-xxl:140px;
+
+    /* Sombras */
+
+    --shadow-soft:
+
+        0 20px 50px rgba(0,0,0,.30);
+
+    --shadow-gold:
+
+        0 0 35px rgba(200,154,74,.30);
 
 }
 
-/*=========================
+
+/*==================================================
 GENERAL
-=========================*/
+====================================================*/
 
 body{
 
-    background:var(--negro);
+    background:
+
+        radial-gradient(
+
+            circle at bottom,
+
+            rgba(200,154,74,.06),
+
+            transparent 60%
+
+        ),
+
+        linear-gradient(
+
+            180deg,
+
+            #070707 0%,
+
+            #090909 45%,
+
+            #050505 100%
+
+        );
 
     color:var(--blanco);
 
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:var(--texto);
+
+    line-height:1.7;
+
+    overflow-x:hidden;
+
+    -webkit-font-smoothing:antialiased;
+
+    text-rendering:optimizeLegibility;
 
 }
 
-/*=========================
+section{
+
+    position:relative;
+
+}
+
+.container{
+
+    width:min(1200px,90%);
+
+    margin:auto;
+
+}
+/*==================================================
 HEADER
-=========================*/
+====================================================*/
 
 header{
-
 
     position:fixed;
 
     top:0;
-
     left:0;
 
     width:100%;
-
-    height:80px;
-
-    padding:0 60px;
 
     display:flex;
 
@@ -68,44 +179,130 @@ header{
 
     align-items:center;
 
-    background:rgba(8,8,8,.30);
-    border-bottom:1px solid rgba(200,154,74,.08);
+    padding:24px 60px;
 
-    backdrop-filter:blur(18px);
+    background:rgba(6,6,6,.45);
 
-    z-index:999;
+    backdrop-filter:blur(14px);
 
-    transition:.4s;
+    -webkit-backdrop-filter:blur(14px);
+
+    border-bottom:1px solid rgba(200,154,74,.10);
+
+    z-index:1000;
+
+    transition:
+
+        background .35s ease,
+
+        padding .35s ease,
+
+        border-color .35s ease,
+
+        box-shadow .35s ease;
 
 }
 
 
+/*==============================
+LOGO
+==============================*/
 
+.logo{
 
-    .logo img{
-    width:220px;
-    transition:.4s;
+    display:flex;
+
+    align-items:center;
+
+}
+.logo a{
+
+    display:inline-block;
+
+}
+
+.logo img{
+
+    width:210px;
+
+    height:auto;
+
+    display:block;
+
+    cursor:pointer;
+
+    transition:
+
+        width .35s ease,
+
+        transform .35s ease,
+
+        opacity .35s ease;
+
+}
+
+.logo:hover img{
+
+    transform:scale(1.03);
+
+    opacity:.9;
+
 }
 
 
-
-
+/*==============================
+NAVEGACIÓN
+==============================*/
 
 nav{
 
     display:flex;
 
-    gap:40px;
+    align-items:center;
+
+    gap:42px;
 
 }
 
 nav a{
 
-    color:white;
+    position:relative;
 
-    text-decoration:none;
+    color:var(--blanco);
 
-    transition:.3s;
+    font-size:.90rem;
+
+    font-weight:500;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    transition:
+
+        color .35s ease,
+
+        opacity .35s ease;
+
+}
+
+nav a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-8px;
+
+    width:0;
+
+    height:1px;
+
+    background:var(--dorado);
+
+    transition:width .35s ease;
 
 }
 
@@ -115,15 +312,43 @@ nav a:hover{
 
 }
 
-/*=========================
+nav a:hover::after{
+
+    width:100%;
+
+}
+
+
+/*==============================
+HEADER AL HACER SCROLL
+==============================*/
+
+header.scrolled{
+
+    padding:16px 60px;
+
+    background:rgba(8,8,8,.92);
+
+    border-bottom:1px solid rgba(200,154,74,.18);
+
+    box-shadow:0 10px 35px rgba(0,0,0,.35);
+
+}
+
+header.scrolled .logo img{
+
+    width:175px;
+
+}
+/*==================================================
 HERO
-=========================*/
+====================================================*/
 
 .hero{
 
     position:relative;
 
-    overflow:hidden;
+    width:100%;
 
     min-height:100vh;
 
@@ -133,7 +358,101 @@ HERO
 
     align-items:center;
 
+    overflow:hidden;
+
+    text-align:center;
+
 }
+
+
+/*==============================
+IMAGEN
+==============================*/
+
+.hero-image{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    object-position:center center;
+
+    filter:
+        brightness(.72)
+        contrast(1.03)
+        saturate(1);
+
+    animation:heroMove 32s ease-in-out infinite alternate;
+    opacity:0;
+
+    animation:
+
+        heroFade 1.6s ease forwards,
+
+        heroMove 32s ease-in-out 1.6s infinite alternate;
+
+
+}
+
+
+/*==============================
+CAPAS DE LUZ
+==============================*/
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+
+            rgba(0,0,0,.08),
+
+            rgba(0,0,0,.35)
+
+        );
+
+    z-index:1;
+
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+
+            circle at center,
+
+            transparent 45%,
+
+            rgba(0,0,0,.18) 100%
+
+        );
+
+    z-index:1;
+
+}
+
+/*==============================
+CONTENIDO
+==============================*/
 
 .hero-content{
 
@@ -141,144 +460,266 @@ HERO
 
     z-index:2;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 22px;
+    width:min(900px,90%);
 
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
 
 }
 
-.hero h2{
+
+/*==============================
+INFORMACIÓN
+==============================*/
+
+.hero-info{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:22px;
+
+    margin-bottom:34px;
+
+    flex-wrap:wrap;
+
+}
+
+.hero-location{
+
+    color:#8d8d8d;
+
+    font-size:.82rem;
+
+    letter-spacing:5px;
+
+    text-transform:uppercase;
+
+}
+
+.hero-divider{
+
+    width:70px;
+
+    height:1px;
+
+    background:rgba(200,154,74,.45);
+
+}
+
+.hero-subtitle{
 
     color:var(--dorado);
 
-    letter-spacing:4px;
+    font-size:.90rem;
 
-    margin-bottom:20px;
+    font-weight:600;
+
+    letter-spacing:7px;
+
+    text-transform:uppercase;
 
 }
+
+
+/*==============================
+TÍTULO
+==============================*/
 
 .hero h1{
 
-    font-family: "Cinzel", serif;
+    font-family:var(--titulo);
 
-    font-size: 4rem;
+    font-size:clamp(4.5rem,9vw,7rem);
 
-    font-weight: 700;
+    font-weight:600;
 
-    color: white;
+    line-height:.90;
 
-    line-height: 1.05;
+    letter-spacing:1px;
 
-    margin: 18px 0;
+    margin-bottom:28px;
 
-    text-transform: uppercase;
+    text-shadow:
+
+        0 10px 35px rgba(0,0,0,.55);
 
 }
+
+
+/*==============================
+DESCRIPCIÓN
+==============================*/
 
 .hero p{
 
-    font-size:1.35rem;
+    max-width:700px;
 
-    color:#C8C8C8;
+    color:#d0d0d0;
 
-    max-width:650px;
+    font-size:1.25rem;
+
+    line-height:1.9;
+
+    font-weight:300;
 
     margin:auto;
 
-    line-height:1.8;
-
-    margin-bottom: 18px;
-    
-     
 }
 
-/*=========================
-BOTONES
-=========================*/
 
+/*==============================
+BOTONES
+==============================*/
+
+.hero .botones{
+
+    margin-top:45px;
+
+}
 .botones{
 
     display:flex;
-    
+
     justify-content:center;
 
-    gap:20px;
+    align-items:center;
 
-    margin-top:15px;
+    gap:24px;
+
+    flex-wrap:wrap;
 
 }
 
 .btn-principal{
 
-    background:var(--dorado);
+    display:inline-flex;
 
-    color:black;
+    justify-content:center;
+
+    align-items:center;
+
+    min-width:220px;
+
+    padding:18px 42px;
+
+    border-radius:50px;
+
+    background:linear-gradient(
+        180deg,
+        #e7c26d 0%,
+        #c89a4a 100%
+    );
+
+    color:#111;
+
+    font-size:.95rem;
+
+    font-weight:700;
+
+    letter-spacing:1px;
 
     text-decoration:none;
 
-    padding:18px 38px;
+    box-shadow:
+        0 12px 35px rgba(200,154,74,.35);
 
-    border-radius:40px;
+    transition:
+        all .35s ease;
 
-    font-weight:bold;
+}
+
+.btn-principal:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 20px 45px rgba(200,154,74,.45);
 
 }
 
 .btn-secundario{
 
-    border:2px solid var(--dorado);
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-width:220px;
+
+    padding:18px 42px;
+
+    border:2px solid rgba(200,154,74,.75);
+
+    border-radius:50px;
 
     color:white;
 
-    text-decoration:none;
+    font-weight:600;
 
-    padding:18px 38px;
-
-    border-radius:40px;
+    transition:all .35s ease;
 
 }
-.hero::before{
 
-    content:"";
+.btn-secundario:hover{
 
-    position:absolute;
+    background:rgba(200,154,74,.10);
 
-    left:50%;
-    bottom:-320px;
-
-    transform:translateX(-50%);
-
-    width:1800px;
-    height:800px;
-
-    background:radial-gradient(
-
-        ellipse at center,
-
-        rgba(200,154,74,.30) 0%,
-
-        rgba(200,154,74,.12) 28%,
-
-        rgba(200,154,74,.04) 55%,
-
-        transparent 78%
-
-    );
-
-    filter:blur(80px);
-
-    z-index:0;
+    border-color:var(--dorado);
 
 }
-.fade-up {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
+/*==============================
+HERO CINEMÁTICO
+==============================*/
 
-.fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
+@keyframes heroMove{
+
+    0%{
+
+        transform:
+            scale(1)
+            translate3d(0,0,0);
+
+    }
+
+    50%{
+
+        transform:
+            scale(1.03)
+            translate3d(-0.8%, -0.5%,0);
+
+    }
+
+    100%{
+
+        transform:
+            scale(1.06)
+            translate3d(0.8%,0.5%,0);
+
+    }
+
+}
+@keyframes heroFade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
 }
