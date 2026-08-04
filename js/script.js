@@ -32,13 +32,21 @@ LIGHTBOX GALERÍA
 
 
 const posters = document.querySelectorAll(".poster-button");
-console.log(posters);
+
 const lightbox = document.querySelector(".lightbox");
 const lightboxImage = document.querySelector(".lightbox-image");
 const closeButton = document.querySelector(".close-lightbox");
 
 const prevButton = document.querySelector(".prev-photo");
 const nextButton = document.querySelector(".next-photo");
+if (
+    posters.length &&
+    lightbox &&
+    lightboxImage &&
+    closeButton &&
+    prevButton &&
+    nextButton
+) {
 
 let images = [];
 let currentIndex = 0;
@@ -104,4 +112,4 @@ lightbox.addEventListener("click",(e)=>{
     }
 
 });
-
+}

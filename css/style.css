@@ -838,5 +838,98 @@ nav a{
     font-size:1rem;
 
 }
+/*==============================
+HERO MOBILE
+==============================*/
 
+.hero{
+
+    min-height:100svh;
+
+    padding:110px 20px 40px;
+
+}
+
+.hero-content{
+
+    width:100%;
+
+}
+
+.hero-info{
+
+    gap:10px;
+
+    margin-bottom:12px;
+
+}
+
+.hero-location{
+
+    font-size:.70rem;
+
+    letter-spacing:3px;
+
+}
+
+.hero-divider{
+
+    width:40px;
+
+}
+
+.hero-subtitle{
+
+    font-size:.72rem;
+
+    letter-spacing:2px;
+
+}
+
+.hero h1{
+
+    font-size:3rem;
+
+    line-height:.95;
+
+    margin-bottom:18px;
+
+}
+
+.hero p{
+
+    font-size:1rem;
+
+    line-height:1.6;
+
+    max-width:95%;
+
+}
+
+.hero .botones{
+
+    margin-top:20px;
+
+}
+
+.botones{
+
+    flex-direction:column;
+
+    width:100%;
+
+    gap:16px;
+
+}
+
+.btn-principal,
+.btn-secundario{
+
+    width:100%;
+
+    max-width:300px;
+
+    min-width:0;
+
+}
 }
