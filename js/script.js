@@ -1,3 +1,9 @@
+console.log("SCRIPT NUEVO CARGADO");
+
+/*==================================================
+ANIMACIONES AL CARGAR
+==================================================*/
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const elementos = document.querySelectorAll(".fade-up");
@@ -5,15 +11,25 @@ document.addEventListener("DOMContentLoaded", () => {
     elementos.forEach((elemento, index) => {
 
         setTimeout(() => {
+
             elemento.classList.add("visible");
+
         }, index * 300);
 
     });
 
 });
-window.addEventListener("scroll", function () {
+
+
+/*==================================================
+HEADER AL HACER SCROLL
+==================================================*/
+
+window.addEventListener("scroll", () => {
 
     const header = document.querySelector("header");
+
+    if (!header) return;
 
     if (window.scrollY > 80) {
 
@@ -26,90 +42,139 @@ window.addEventListener("scroll", function () {
     }
 
 });
-/*=========================================
-LIGHTBOX GALERÍA
-=========================================*/
 
+
+/*==================================================
+LIGHTBOX GALERÍA
+==================================================*/
 
 const posters = document.querySelectorAll(".poster-button");
 
 const lightbox = document.querySelector(".lightbox");
+
 const lightboxImage = document.querySelector(".lightbox-image");
+
 const closeButton = document.querySelector(".close-lightbox");
 
 const prevButton = document.querySelector(".prev-photo");
+
 const nextButton = document.querySelector(".next-photo");
+
+
 if (
-    posters.length &&
+
+    posters.length > 0 &&
     lightbox &&
     lightboxImage &&
     closeButton &&
     prevButton &&
     nextButton
+
 ) {
 
-let images = [];
-let currentIndex = 0;
+    let images = [];
 
-posters.forEach((poster)=>{
+    let currentIndex = 0;
 
-    poster.addEventListener("click",()=>{
+    posters.forEach((poster) => {
 
-        images = poster.dataset.gallery.split(",");
+        poster.addEventListener("click", () => {
 
-        images = images.map(img => img.trim());
+            images = poster.dataset.gallery.split(",");
 
-        currentIndex = 0;
+            images = images.map(img => img.trim());
 
-        lightboxImage.src = images[currentIndex];
+            currentIndex = 0;
 
-        lightbox.classList.add("active");
+            lightboxImage.src = images[currentIndex];
+
+            lightbox.classList.add("active");
+
+        });
 
     });
 
-});
 
-nextButton.addEventListener("click",()=>{
+    nextButton.addEventListener("click", () => {
 
-    currentIndex++;
+        currentIndex++;
 
-    if(currentIndex >= images.length){
+        if (currentIndex >= images.length) {
 
-        currentIndex = 0;
+            currentIndex = 0;
 
-    }
+        }
 
-    lightboxImage.src = images[currentIndex];
+        lightboxImage.src = images[currentIndex];
 
-});
+    });
 
-prevButton.addEventListener("click",()=>{
 
-    currentIndex--;
+    prevButton.addEventListener("click", () => {
 
-    if(currentIndex < 0){
+        currentIndex--;
 
-        currentIndex = images.length-1;
+        if (currentIndex < 0) {
 
-    }
+            currentIndex = images.length - 1;
 
-    lightboxImage.src = images[currentIndex];
+        }
 
-});
+        lightboxImage.src = images[currentIndex];
 
-closeButton.addEventListener("click",()=>{
+    });
 
-    lightbox.classList.remove("active");
 
-});
-
-lightbox.addEventListener("click",(e)=>{
-
-    if(e.target === lightbox){
+    closeButton.addEventListener("click", () => {
 
         lightbox.classList.remove("active");
 
-    }
+    });
 
-});
+
+    lightbox.addEventListener("click", (e) => {
+
+        if (e.target === lightbox) {
+
+            lightbox.classList.remove("active");
+
+        }
+
+    });
+
+}
+
+
+/*==================================================
+MENÚ HAMBURGUESA
+==================================================*/
+
+const menuToggle = document.querySelector(".menu-toggle");
+
+const nav = document.querySelector("nav");
+
+
+if (menuToggle && nav) {
+
+    menuToggle.addEventListener("click", () => {
+
+        nav.classList.toggle("active");
+
+        menuToggle.classList.toggle("active");
+
+    });
+
+
+    document.querySelectorAll("nav a").forEach((link) => {
+
+        link.addEventListener("click", () => {
+
+            nav.classList.remove("active");
+
+            menuToggle.classList.remove("active");
+
+        });
+
+    });
+
 }
