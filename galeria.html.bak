@@ -74,15 +74,15 @@ Cada concierto cuenta una historia.
 
         <img
         class="event-poster"
-        src="images/flyers/Vfw.webp"
+        src="images/flyers/Vfw.jpg"
         alt="VFW"
 
          data-gallery="
-        images/galeria/Vfw/01.webp,
-        images/galeria/Vfw/02.webp,
-        images/galeria/Vfw/03.webp,
-        images/galeria/Vfw/04.webp,
-        images/galeria/Vfw/05.webp">
+        images/galeria/Vfw/01.jpg,
+        images/galeria/Vfw/02.jpg,
+        images/galeria/Vfw/03.jpg,
+        images/galeria/Vfw/04.jpg,
+        images/galeria/Vfw/05.jpg">
 
         <h3>VFW</h3>
 
@@ -96,15 +96,15 @@ Cada concierto cuenta una historia.
 
         <img
         class="event-poster"
-        src="images/flyers/Barzia.webp"
+        src="images/flyers/Barzia.jpg"
         alt="BarZia"
 
         data-gallery="
-        images/galeria/Barzia/01.webp,
-        images/galeria/Barzia/02.webp,
-        images/galeria/Barzia/03.webp,
-        images/galeria/Barzia/04.webp,
-        images/galeria/Barzia/05.webp">
+        images/galeria/Barzia/01.jpg,
+        images/galeria/Barzia/02.jpg,
+        images/galeria/Barzia/03.jpg,
+        images/galeria/Barzia/04.jpg,
+        images/galeria/Barzia/05.jpg">
 
         <h3>BARZIA</h3>
 
@@ -118,15 +118,15 @@ Cada concierto cuenta una historia.
 
         <img
         class="event-poster"
-        src="images/flyers/Driftwood_Char_Bar.webp"
+        src="images/flyers/Driftwood_Char_Bar.jpg"
         alt="Driftwood_Cha-Bar"
 
         data-gallery="
-        images/galeria/Driftwood_Char_Bar/01.webp,
-        images/galeria/Driftwood_Char_Bar/02.webp,
-        images/galeria/Driftwood_Char_Bar/03.webp,
-        images/galeria/Driftwood_Char_Bar/04.webp,
-        images/galeria/Driftwood_Char_Bar/05.webp">
+        images/galeria/Driftwood_Char_Bar/01.jpg,
+        images/galeria/Driftwood_Char_Bar/02.jpg,
+        images/galeria/Driftwood_Char_Bar/03.jpg,
+        images/galeria/Driftwood_Char_Bar/04.jpg,
+        images/galeria/Driftwood_Char_Bar/05.jpg">
 
         <h3>DRIFTWOOD CHAR BAR</h3>
 
@@ -140,13 +140,13 @@ Cada concierto cuenta una historia.
 
         <img
         class="event-poster"
-        src="images/flyers/underground.webp"
+        src="images/flyers/underground.jpg"
         alt="Underground Music Venue"
 
         data-gallery="
-        images/galeria/underground/01.webp,
-        images/galeria/underground/02.webp,
-        images/galeria/underground/03.webp"
+        images/galeria/underground/01.jpg,
+        images/galeria/underground/02.jpg,
+        images/galeria/underground/03.jpg"
   >
 
         <h3>UNDERGROUND MUSIC VENUE</h3>
@@ -161,13 +161,13 @@ Cada concierto cuenta una historia.
 
         <img
         class="event-poster"
-        src="images/flyers/Driftwood31.webp"
+        src="images/flyers/Driftwood31.jpg"
         alt="Driftwood Char Bar"
 
         data-gallery="
-        images/galeria/Driftwood 31:10/01.webp,
-        images/galeria/Driftwood 31:10/02.webp,
-        images/galeria/Driftwood 31:10/03.webp"
+        images/galeria/Driftwood 31:10/01.jpg,
+        images/galeria/Driftwood 31:10/02.jpg,
+        images/galeria/Driftwood 31:10/03.jpg"
         >
 
         <h3>DRIFTWOOD CHAR BAR</h3>

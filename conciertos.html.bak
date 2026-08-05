@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Conciertos | Perro Solar</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/conciertos.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+
+        <a href="index.html" aria-label="Inicio">
+
+            <img
+                src="images/Logo/perrosolarlogo.png"
+                alt="Perro Solar">
+
+        </a>
+
+    </div>
+<button class="menu-toggle" aria-label="Abrir menú">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+</button>
+    <nav>
+
+        <a href="historia.html">Historia</a>
+
+        <a href="musica.html">Música</a>
+
+        <a href="galeria.html">Galería</a>
+
+        <a href="conciertos.html">Conciertos</a>
+
+        <a href="contacto.html">Contacto</a>
+
+    </nav>
+
+</header>
+
+<main>
+
+    <section class="concerts">
+
+        <div class="concert-container">
+
+            <div class="concert-logo">
+
+                <video
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="auto">
+
+                    <source
+                        src="images/Banda/perro_animado_HB.mp4"
+                        type="video/mp4">
+
+                    Tu navegador no soporta video HTML5.
+
+                </video>
+
+            </div>
+
+            <h1>
+
+    PRÓXIMAMENTE
+
+    <br>
+
+    <span>NUEVAS FECHAS.</span>
+
+</h1>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <p>
+
+        © 2026 Perro Solar · Todos los derechos reservados.
+
+    </p>
+
+</footer>
+
+</body>
+
+</html>
