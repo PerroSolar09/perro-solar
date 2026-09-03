@@ -178,7 +178,6 @@ if (menuToggle && nav) {
     });
 
 }
-```javascript
 /*==================================================
 PERRO SOLAR · CUENTA REGRESIVA SILENCIO AL VOLVER
 ==================================================*/
@@ -186,11 +185,9 @@ PERRO SOLAR · CUENTA REGRESIVA SILENCIO AL VOLVER
 document.addEventListener("DOMContentLoaded", () => {
 
     const countdown = document.getElementById("release-countdown");
-
     const video = document.getElementById("release-video");
 
     if (!countdown || !video) return;
-
 
     /*
     Estreno:
@@ -206,35 +203,26 @@ document.addEventListener("DOMContentLoaded", () => {
         "2026-09-07T08:00:00-05:00"
     );
 
-
     const daysElement = document.getElementById("days");
-
     const hoursElement = document.getElementById("hours");
-
     const minutesElement = document.getElementById("minutes");
-
     const secondsElement = document.getElementById("seconds");
 
-
-    function updateCountdown(){
+    function updateCountdown() {
 
         const now = new Date();
 
         const difference =
             releaseDate.getTime() - now.getTime();
 
-
         /*
         Cuando llega el momento del estreno
         */
 
-        if (difference <= 0){
+        if (difference <= 0) {
 
             countdown.style.opacity = "0";
-
-            countdown.style.transform =
-                "translateY(-20px)";
-
+            countdown.style.transform = "translateY(-20px)";
 
             setTimeout(() => {
 
@@ -244,54 +232,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }, 600);
 
-
             clearInterval(timer);
 
             return;
-
         }
-
 
         const days = Math.floor(
             difference / (1000 * 60 * 60 * 24)
         );
 
-
         const hours = Math.floor(
             (difference / (1000 * 60 * 60)) % 24
         );
-
 
         const minutes = Math.floor(
             (difference / (1000 * 60)) % 60
         );
 
-
         const seconds = Math.floor(
             (difference / 1000) % 60
         );
 
-
         daysElement.textContent =
             String(days).padStart(2, "0");
-
 
         hoursElement.textContent =
             String(hours).padStart(2, "0");
 
-
         minutesElement.textContent =
             String(minutes).padStart(2, "0");
-
 
         secondsElement.textContent =
             String(seconds).padStart(2, "0");
 
     }
 
+    /*
+    Ejecutar inmediatamente
+    */
 
     updateCountdown();
 
+    /*
+    Actualizar cada segundo
+    */
 
     const timer = setInterval(
         updateCountdown,
@@ -299,4 +283,3 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
-```
