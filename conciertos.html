@@ -16,11 +16,15 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
 
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -35,80 +39,192 @@
         </a>
 
     </div>
-<button class="menu-toggle" aria-label="Abrir menú">
 
-    <span></span>
-    <span></span>
-    <span></span>
 
-</button>
+    <button
+        class="menu-toggle"
+        aria-label="Abrir menú">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+
     <nav>
 
-        <a href="historia.html">Historia</a>
+        <a href="historia.html">
+            Historia
+        </a>
 
-        <a href="musica.html">Música</a>
+        <a href="musica.html">
+            Música
+        </a>
 
-        <a href="galeria.html">Galería</a>
+        <a href="galeria.html">
+            Galería
+        </a>
 
-        <a href="conciertos.html">Conciertos</a>
+        <a href="conciertos.html">
+            Conciertos
+        </a>
 
-        <a href="contacto.html">Contacto</a>
+        <a href="contacto.html">
+            Contacto
+        </a>
 
     </nav>
 
 </header>
 
+
 <main>
+
 
     <section class="concerts">
 
+
         <div class="concert-container">
 
-            <div class="concert-logo">
 
-                <video
-                    autoplay
-                    muted
-                    loop
-                    playsinline
-                    preload="auto">
+            <!-- ENCABEZADO -->
 
-                    <source
-                        src="images/Banda/perro_animado_HB.mp4"
-                        type="video/mp4">
+            <div class="concert-header">
 
-                    Tu navegador no soporta video HTML5.
+                <span class="concert-kicker">
+                    PRÓXIMO CONCIERTO
+                </span>
 
-                </video>
+                <div class="concert-line"></div>
 
             </div>
 
-            <h1>
 
-    PRÓXIMAMENTE
+            <!-- EVENTO -->
 
-    <br>
+            <article class="concert-event">
 
-    <span>NUEVAS FECHAS.</span>
 
-</h1>
+                <!-- FLYER -->
+
+                <div class="concert-poster">
+
+                    <img
+                        src="images/flyers/Laestacion.png"
+                        alt="Perro Solar en La Estación Rock And Roll - sábado 17 de octubre de 2026">
+
+                </div>
+
+
+                <!-- INFORMACIÓN -->
+
+                <div class="concert-content">
+
+
+                    <div class="event-date">
+
+                        <span class="date-day">
+                            17
+                        </span>
+
+                        <div class="date-text">
+
+                            <span>
+                                SÁBADO
+                            </span>
+
+                            <span>
+                                OCTUBRE
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="event-time">
+                        9:00 PM
+                    </div>
+
+
+                    <div class="event-divider"></div>
+
+
+                    <div class="event-venue">
+
+                        <span class="venue-label">
+                            LUGAR
+                        </span>
+
+                        <h1>
+                            La Estación
+                            <br>
+                            Rock And Roll
+                        </h1>
+
+                        <p>
+                            Calle 132 #102-10
+                            <br>
+                            Suba, Bogotá
+                        </p>
+
+
+                        <a
+                            href="https://maps.app.goo.gl/zsdu1GifQC5qSBBC9"
+                            class="maps-link"
+                            target="_blank"
+                            rel="noopener noreferrer">
+
+                            <span>
+                                Ver ubicación
+                            </span>
+
+                            <span class="maps-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+                    </div>
+
+
+                    <div class="free-entry">
+
+                        <span>
+                            ENTRADA LIBRE
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </article>
+
 
         </div>
 
+
     </section>
 
+
 </main>
+
 
 <footer>
 
     <p>
-
         © 2026 Perro Solar · Todos los derechos reservados.
-
     </p>
 
 </footer>
+
+
 <script src="js/conciertos.js"></script>
+
+
 </body>
 
 </html>
