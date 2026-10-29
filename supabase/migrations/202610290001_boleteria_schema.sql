@@ -249,7 +249,7 @@ begin
 
     v_expires_at := now() + interval '15 minutes';
 
-    insert into public.orders (
+    insert into public.orders as new_order (
         event_id, ticket_type_id, buyer_name, buyer_email, quantity,
         unit_price_cop, total_cop, status, idempotency_key, expires_at
     ) values (
@@ -257,7 +257,7 @@ begin
         p_quantity, v_unit_price, v_unit_price::bigint * p_quantity,
         'pending_payment', p_idempotency_key, v_expires_at
     )
-    returning id, public.orders.total_cop, public.orders.expires_at
+    returning new_order.id, new_order.total_cop, new_order.expires_at
       into v_order_id, total_cop, v_expires_at;
 
     update public.ticket_types
