@@ -159,5 +159,124 @@ and not exists (
     where tt.event_id = events.id and tt.name = 'Preventa'
 );
 
+-- Transaction-safe reservation RPC.
+-- Sales remain impossible until the event is set to on_sale and ticket type active=true.
+-- Called only by a trusted server-side Edge Function; never expose this RPC to anon/authenticated.
+
+create or replace function public.reserve_ticket_order(
+    p_event_slug text,
+    p_quantity integer,
+    p_buyer_name text,
+    p_buyer_email text,
+    p_idempotency_key text
+)
+returns table (
+    order_id uuid,
+    total_cop bigint,
+    expires_at timestamptz
+)
+language plpgsql
+security definer
+set search_path = ''
+as $
+declare
+    v_event_id uuid;
+    v_ticket_type_id uuid;
+    v_unit_price integer;
+    v_capacity integer;
+    v_sold integer;
+    v_reserved integer;
+    v_order_id uuid;
+    v_expires_at timestamptz;
+begin
+    if p_quantity is null or p_quantity < 1 or p_quantity > 10 then
+        raise exception 'Invalid ticket quantity';
+    end if;
+
+    if p_buyer_name is null or char_length(trim(p_buyer_name)) not between 2 and 120 then
+        raise exception 'Invalid buyer name';
+    end if;
+
+    if p_buyer_email is null or char_length(trim(p_buyer_email)) not between 5 and 254 then
+        raise exception 'Invalid buyer email';
+    end if;
+
+    if p_idempotency_key is null or char_length(trim(p_idempotency_key)) not between 16 and 200 then
+        raise exception 'Invalid idempotency key';
+    end if;
+
+    select e.id
+      into v_event_id
+      from public.events e
+     where e.slug = p_event_slug
+       and e.status = 'on_sale';
+
+    if v_event_id is null then
+        raise exception 'Event is not on sale';
+    end if;
+
+    -- Lock the ticket type row so simultaneous purchases cannot oversell capacity.
+    select tt.id, tt.unit_price_cop, tt.capacity, tt.sold_count, tt.reserved_count
+      into v_ticket_type_id, v_unit_price, v_capacity, v_sold, v_reserved
+      from public.ticket_types tt
+     where tt.event_id = v_event_id
+       and tt.name = 'Preventa'
+       and tt.active = true
+       and (tt.sales_start_at is null or tt.sales_start_at <= now())
+       and (tt.sales_end_at is null or tt.sales_end_at > now())
+     for update;
+
+    if v_ticket_type_id is null then
+        raise exception 'Ticket type is not available';
+    end if;
+
+    -- Reusing an idempotency key must not create a second order.
+    select o.id, o.total_cop, o.expires_at
+      into v_order_id, total_cop, v_expires_at
+      from public.orders o
+     where o.idempotency_key = p_idempotency_key;
+
+    if v_order_id is not null then
+        order_id := v_order_id;
+        expires_at := v_expires_at;
+        return next;
+        return;
+    end if;
+
+    if v_sold + v_reserved + p_quantity > v_capacity then
+        raise exception 'Not enough tickets available';
+    end if;
+
+    v_expires_at := now() + interval '15 minutes';
+
+    insert into public.orders (
+        event_id, ticket_type_id, buyer_name, buyer_email, quantity,
+        unit_price_cop, total_cop, status, idempotency_key, expires_at
+    ) values (
+        v_event_id, v_ticket_type_id, trim(p_buyer_name), lower(trim(p_buyer_email)),
+        p_quantity, v_unit_price, v_unit_price::bigint * p_quantity,
+        'pending_payment', p_idempotency_key, v_expires_at
+    )
+    returning id, public.orders.total_cop, public.orders.expires_at
+      into v_order_id, total_cop, v_expires_at;
+
+    update public.ticket_types
+       set reserved_count = reserved_count + p_quantity
+     where id = v_ticket_type_id;
+
+    order_id := v_order_id;
+    expires_at := v_expires_at;
+    return next;
+end;
+$;
+
+revoke all on function public.reserve_ticket_order(text, integer, text, text, text) from public, anon, authenticated;
+grant execute on function public.reserve_ticket_order(text, integer, text, text, text) to service_role;
+
+-- Payment verification, QR issuance, reservation expiry cleanup, and check-in RPCs
+-- are intentionally deferred to the next migration, after server-side Wompi webhook
+-- signature verification is implemented and tested. Never trust a browser redirect
+-- as proof of payment.
+
 -- Important: no payment or QR issuance function is exposed in this first migration.
 -- These will be added after the Wompi sandbox webhook and idempotency flow are tested.
