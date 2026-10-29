@@ -1,0 +1,226 @@
+/*====================================================
+    BOLETERÍA / PREVENTA PERRO SOLAR
+    Mantiene la identidad visual negro + dorado.
+=====================================================*/
+
+.presale-section {
+    padding: 64px 40px 80px;
+    background:
+        radial-gradient(circle at 50% 45%, rgba(181, 130, 35, .055), transparent 48%),
+        #050505;
+    border-top: 1px solid rgba(181, 130, 35, .22);
+}
+
+.presale-container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.presale-eyebrow {
+    margin-bottom: 24px;
+    text-align: center;
+    font-family: "Cinzel", serif;
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--dorado, #b58223);
+}
+
+.presale-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+    border: 1px solid rgba(181, 130, 35, .42);
+    background: linear-gradient(135deg, rgba(22, 22, 22, .96), rgba(5, 5, 5, .98));
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+}
+
+.presale-copy {
+    padding: clamp(26px, 5vw, 58px);
+}
+
+.presale-kicker {
+    margin: 0 0 14px;
+    color: var(--dorado, #b58223);
+    font-family: "Inter", sans-serif;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+.presale-copy h2 {
+    margin: 0;
+    color: #f4f1ea;
+    font-family: "Cinzel", serif;
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.presale-description {
+    max-width: 600px;
+    margin: 18px 0 28px;
+    color: #bdb9b1;
+    font-family: "Inter", sans-serif;
+    font-size: .98rem;
+    line-height: 1.75;
+}
+
+.presale-details {
+    display: grid;
+    gap: 0;
+    margin: 0 0 28px;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgba(181, 130, 35, .25);
+}
+
+.presale-details li {
+    display: grid;
+    grid-template-columns: minmax(105px, .45fr) 1fr;
+    gap: 18px;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(181, 130, 35, .18);
+    color: #e4e0d8;
+    font-family: "Inter", sans-serif;
+    font-size: .92rem;
+    line-height: 1.5;
+}
+
+.presale-label {
+    color: #8d8982;
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+}
+
+.presale-price {
+    color: var(--dorado, #b58223);
+    font-family: "Cinzel", serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.presale-price small {
+    display: block;
+    margin-top: 3px;
+    color: #aaa59b;
+    font-family: "Inter", sans-serif;
+    font-size: .75rem;
+    font-weight: 400;
+}
+
+.presale-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+    padding: 14px 22px;
+    border: 1px solid rgba(181, 130, 35, .65);
+    background: transparent;
+    color: var(--dorado, #b58223);
+    font-family: "Cinzel", serif;
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+    cursor: not-allowed;
+    opacity: .82;
+}
+
+.presale-status {
+    max-width: 570px;
+    margin: 13px 0 0;
+    color: #89857d;
+    font-family: "Inter", sans-serif;
+    font-size: .78rem;
+    line-height: 1.6;
+}
+
+.presale-aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px;
+    padding: 32px;
+    border-left: 1px solid rgba(181, 130, 35, .32);
+    background:
+        radial-gradient(circle at 50% 42%, rgba(181, 130, 35, .13), transparent 52%),
+        #090909;
+    text-align: center;
+}
+
+.presale-mark {
+    color: rgba(181, 130, 35, .82);
+    font-family: "Cinzel", serif;
+    font-size: clamp(5rem, 10vw, 8.5rem);
+    font-weight: 700;
+    letter-spacing: -8px;
+    line-height: 1;
+}
+
+.presale-aside-title {
+    margin-top: 22px;
+    color: #f4f1ea;
+    font-family: "Cinzel", serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+.presale-aside-subtitle {
+    margin-top: 10px;
+    color: #9d978c;
+    font-family: "Inter", sans-serif;
+    font-size: .68rem;
+    letter-spacing: 3px;
+}
+
+.presale-rule {
+    width: 52px;
+    height: 1px;
+    margin: 27px 0;
+    background: var(--dorado, #b58223);
+}
+
+.presale-aside-date {
+    color: var(--dorado, #b58223);
+    font-family: "Cinzel", serif;
+    font-size: 1.05rem;
+    letter-spacing: 3px;
+}
+
+@media (max-width: 760px) {
+    .presale-section {
+        padding: 42px 20px 54px;
+    }
+
+    .presale-card {
+        grid-template-columns: 1fr;
+    }
+
+    .presale-aside {
+        min-height: 250px;
+        border-top: 1px solid rgba(181, 130, 35, .32);
+        border-left: 0;
+    }
+
+    .presale-mark {
+        font-size: 5.5rem;
+    }
+
+    .presale-details li {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .presale-button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .presale-section * {
+        scroll-behavior: auto;
+    }
+}
