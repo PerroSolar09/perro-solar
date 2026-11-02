@@ -178,7 +178,7 @@ returns table (
 language plpgsql
 security definer
 set search_path = ''
-as $
+as $$
 declare
     v_event_id uuid;
     v_ticket_type_id uuid;
@@ -268,7 +268,7 @@ begin
     expires_at := v_expires_at;
     return next;
 end;
-$;
+$$;
 
 revoke all on function public.reserve_ticket_order(text, integer, text, text, text) from public, anon, authenticated;
 grant execute on function public.reserve_ticket_order(text, integer, text, text, text) to service_role;
