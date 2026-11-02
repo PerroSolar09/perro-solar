@@ -12,8 +12,8 @@ declare
     v_order record;
     v_expired_count integer := 0;
 begin
-    -- Lock each expired order so a concurrent payment-confirmation transaction
-    -- cannot also transition the same order.
+    -- Process expired orders one at a time. The payment webhook must use the
+    -- same order-first lock order before changing an order's payment state.
     for v_order in
         select o.id, o.ticket_type_id, o.quantity
           from public.orders o
@@ -116,13 +116,8 @@ begin
         raise exception 'Ticket type is not available';
     end if;
 
-    -- Release expired reservations before checking available capacity.
-    perform public.expire_pending_ticket_orders();
-
-    select tt.sold_count, tt.reserved_count
-      into v_sold, v_reserved
-      from public.ticket_types tt
-     where tt.id = v_ticket_type_id;
+    -- Expired reservations are released by the trusted scheduled cleanup,
+    -- not inside this function, to keep lock ordering predictable.
 
     -- A key may only be replayed for the exact same purchase request.
     select o.*
@@ -183,6 +178,6 @@ revoke all on function public.reserve_ticket_order(text, integer, text, text, te
 grant execute on function public.reserve_ticket_order(text, integer, text, text, text) to service_role;
 
 -- Run expire_pending_ticket_orders() from a trusted scheduled server task.
--- Do not expose it to browsers. Payment confirmation must lock the order row
--- and only convert pending_payment orders to paid once, in the same transaction
--- that issues tickets and updates inventory.
+-- Payment confirmation must lock the order row first and only convert
+-- pending_payment orders to paid once, in the same transaction that issues
+-- tickets and updates inventory.
