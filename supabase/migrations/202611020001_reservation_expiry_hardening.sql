@@ -9,35 +9,42 @@ security definer
 set search_path = ''
 as $$
 declare
+    v_type record;
     v_order record;
+    v_released integer;
     v_expired_count integer := 0;
 begin
-    -- Process expired orders one at a time. The payment webhook must use the
-    -- same order-first lock order before changing an order's payment state.
-    for v_order in
-        select o.id, o.ticket_type_id, o.quantity
-          from public.orders o
-         where o.status = 'pending_payment'
-           and o.expires_at <= now()
-         order by o.expires_at
+    -- Always lock ticket_types before orders. Reservation and payment functions
+    -- must follow this same lock order to avoid deadlocks.
+    for v_type in
+        select tt.id
+          from public.ticket_types tt
+         order by tt.id
          for update skip locked
     loop
-        update public.orders
-           set status = 'expired'
-         where id = v_order.id
-           and status = 'pending_payment';
+        v_released := 0;
 
-        if found then
+        for v_order in
+            update public.orders o
+               set status = 'expired'
+             where o.ticket_type_id = v_type.id
+               and o.status = 'pending_payment'
+               and o.expires_at <= now()
+            returning o.quantity
+        loop
+            v_released := v_released + v_order.quantity;
+            v_expired_count := v_expired_count + 1;
+        end loop;
+
+        if v_released > 0 then
             update public.ticket_types
-               set reserved_count = reserved_count - v_order.quantity
-             where id = v_order.ticket_type_id
-               and reserved_count >= v_order.quantity;
+               set reserved_count = reserved_count - v_released
+             where id = v_type.id
+               and reserved_count >= v_released;
 
             if not found then
-                raise exception 'Reservation inventory inconsistency for order %', v_order.id;
+                raise exception 'Reservation inventory inconsistency for ticket type %', v_type.id;
             end if;
-
-            v_expired_count := v_expired_count + 1;
         end if;
     end loop;
 
@@ -91,6 +98,11 @@ begin
         raise exception 'Invalid idempotency key';
     end if;
 
+    -- Serialize retries using the same idempotency key, even across ticket types.
+    perform pg_catalog.pg_advisory_xact_lock(
+        pg_catalog.hashtextextended(p_idempotency_key, 0)
+    );
+
     select e.id
       into v_event_id
       from public.events e
@@ -101,7 +113,10 @@ begin
         raise exception 'Event is not on sale';
     end if;
 
-    -- Serialize reservations for this ticket type to prevent overselling.
+    -- Release expired reservations first. Cleanup locks ticket_types before orders.
+    perform public.expire_pending_ticket_orders();
+
+    -- Lock the inventory row to serialize capacity checks and reservations.
     select tt.id, tt.unit_price_cop, tt.capacity, tt.sold_count, tt.reserved_count
       into v_ticket_type_id, v_unit_price, v_capacity, v_sold, v_reserved
       from public.ticket_types tt
@@ -116,10 +131,6 @@ begin
         raise exception 'Ticket type is not available';
     end if;
 
-    -- Expired reservations are released by the trusted scheduled cleanup,
-    -- not inside this function, to keep lock ordering predictable.
-
-    -- A key may only be replayed for the exact same purchase request.
     select o.*
       into v_existing
       from public.orders o
@@ -161,7 +172,7 @@ begin
         p_quantity, v_unit_price, v_unit_price::bigint * p_quantity,
         'pending_payment', p_idempotency_key, v_expires_at
     )
-    returning id, public.orders.total_cop, public.orders.expires_at
+    returning id, total_cop, expires_at
       into v_order_id, total_cop, v_expires_at;
 
     update public.ticket_types
@@ -178,6 +189,5 @@ revoke all on function public.reserve_ticket_order(text, integer, text, text, te
 grant execute on function public.reserve_ticket_order(text, integer, text, text, text) to service_role;
 
 -- Run expire_pending_ticket_orders() from a trusted scheduled server task.
--- Payment confirmation must lock the order row first and only convert
--- pending_payment orders to paid once, in the same transaction that issues
--- tickets and updates inventory.
+-- Payment confirmation must lock ticket_types before orders and atomically
+-- transition pending_payment orders, update inventory, and issue tickets.
