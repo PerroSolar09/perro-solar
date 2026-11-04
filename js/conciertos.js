@@ -66,24 +66,32 @@ if (menuToggle && nav) {
     }
 
     function openWompiCheckout(data, buyerName, buyerEmail) {
-        // La Edge Function debe devolver estos campos calculados en servidor.
-        const required = ["public_key", "currency", "amount_in_cents", "reference", "signature_integrity"];
+        const checkout = data.checkout;
+
+        const required = [
+            "public_key",
+            "currency",
+            "amount_in_cents",
+            "reference",
+            "signature_integrity"
+        ];
+
         for (const key of required) {
-            if (data[key] === undefined || data[key] === null || data[key] === "") {
+            if (!checkout || checkout[key] === undefined || checkout[key] === null || checkout[key] === "") {
                 throw new Error("Respuesta incompleta del servidor: falta " + key);
             }
         }
 
         const checkoutForm = document.createElement("form");
         checkoutForm.method = "GET";
-        checkoutForm.action = "https://checkout.wompi.co/p/";
+        checkoutForm.action = checkout.url || "https://checkout.wompi.co/p/";
         checkoutForm.hidden = true;
 
-        hidden(checkoutForm, "public-key", data.public_key);
-        hidden(checkoutForm, "currency", data.currency);
-        hidden(checkoutForm, "amount-in-cents", data.amount_in_cents);
-        hidden(checkoutForm, "reference", data.reference);
-        hidden(checkoutForm, "signature:integrity", data.signature_integrity);
+        hidden(checkoutForm, "public-key", checkout.public_key);
+        hidden(checkoutForm, "currency", checkout.currency);
+        hidden(checkoutForm, "amount-in-cents", checkout.amount_in_cents);
+        hidden(checkoutForm, "reference", checkout.reference);
+        hidden(checkoutForm, "signature:integrity", checkout.signature_integrity);
         hidden(checkoutForm, "customer-data:email", buyerEmail);
         hidden(checkoutForm, "customer-data:full-name", buyerName);
 
@@ -123,8 +131,8 @@ if (menuToggle && nav) {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    name: buyerName,
-                    email: buyerEmail,
+                    buyer_name: buyerName,
+                    buyer_email: buyerEmail,
                     quantity,
                     turnstile_token: turnstileToken,
                     idempotency_key: idempotencyKey
