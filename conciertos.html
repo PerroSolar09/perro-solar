@@ -226,12 +226,26 @@
                         <li><span class="presale-label">PREVENTA</span><span class="presale-price">$10.000 COP <small>por entrada</small></span></li>
                         <li><span class="presale-label">CUPO INICIAL</span><span>100 entradas</span></li>
                     </ul>
-                    <div class="cf-turnstile"
-     data-sitekey="0x4AAAAAAFxOwmR3eEPRBoDd"
-     data-theme="dark">
-</div>
-                    <button class="presale-button" type="button" disabled aria-describedby="presale-status">PREVENTA EN PREPARACIÓN</button>
-                    <p class="presale-status" id="presale-status">La venta se habilitará cuando el sistema de pagos y emisión de entradas esté probado y seguro. Este botón todavía no cobra ni reserva entradas.</p>
+                    <form id="presale-form" class="presale-form">
+                        <label for="buyer-name">NOMBRE COMPLETO</label>
+                        <input id="buyer-name" name="buyer_name" type="text" minlength="2" maxlength="120" autocomplete="name" required disabled>
+
+                        <label for="buyer-email">CORREO ELECTRÓNICO</label>
+                        <input id="buyer-email" name="buyer_email" type="email" maxlength="254" autocomplete="email" required disabled>
+
+                        <label for="ticket-quantity">CANTIDAD DE ENTRADAS</label>
+                        <select id="ticket-quantity" name="quantity" required disabled>
+                            <option value="1">1 entrada</option>
+                            <option value="2">2 entradas</option>
+                            <option value="3">3 entradas</option>
+                            <option value="4">4 entradas</option>
+                            <option value="5">5 entradas</option>
+                        </select>
+
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFxOwmR3eEPRBoDd" data-theme="dark"></div>
+                        <button class="presale-button" id="presale-submit" type="submit" disabled>PREVENTA EN PREPARACIÓN</button>
+                    </form>
+                    <p class="presale-status" id="presale-status" role="status" aria-live="polite">La venta pública permanece deshabilitada. El formulario solo se habilita en pruebas locales.</p>
                 </div>
                 <div class="presale-aside" aria-hidden="true">
                     <span class="presale-mark">PS</span>
