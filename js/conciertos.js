@@ -123,8 +123,8 @@ if (menuToggle && nav) {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    buyer_name: buyerName,
-                    buyer_email: buyerEmail,
+                    name: buyerName,
+                    email: buyerEmail,
                     quantity,
                     turnstile_token: turnstileToken,
                     idempotency_key: idempotencyKey
