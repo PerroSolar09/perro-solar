@@ -1,6 +1,6 @@
 /* Configuración pública de Supabase. La anon key es pública; nunca pongas aquí service_role. */
 const SUPABASE_URL = "https://gphizrvkvxfywttysnfj.supabase.co";
-const SUPABASE_ANON_KEY = "REEMPLAZAR_CON_LA_ANON_KEY_PUBLICA";
+const SUPABASE_ANON_KEY = "sb_publishable__yjcN8rkR_ueEdZVpcj4Dw_xWc6nuOj";
 
 const { createClient } = window.supabase;
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
