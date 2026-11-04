@@ -11,14 +11,14 @@ Deno.serve(async (req) => {
 
   try {
     // This endpoint is intentionally restricted to the single approved Sandbox test.
-    const internalSecret = Deno.env.get("TICKET_EMAIL_INTERNAL_SECRET");
+    const recoverySecret = Deno.env.get("TICKET_RECOVERY_SECRET");
     const privateKey = Deno.env.get("WOMPI_PRIVATE_KEY");
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
     const secretKeysRaw = Deno.env.get("SUPABASE_SECRET_KEYS");
     const legacyServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
     const suppliedSecret = req.headers.get("x-recovery-secret");
-    if (!internalSecret || !suppliedSecret || suppliedSecret !== internalSecret) {
+    if (!recoverySecret || !suppliedSecret || suppliedSecret !== recoverySecret) {
       return reply(401, { error: "Unauthorized" });
     }
 
