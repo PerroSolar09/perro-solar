@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Control de ingreso | Perro Solar</title>
+  <link rel="stylesheet" href="css/checkin.css">
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body>
+  <main class="checkin-shell">
+    <a class="back-link" href="index.html">← Perro Solar</a>
+    <p class="eyebrow">CONTROL DE ACCESO</p>
+    <h1>Validación de boletas</h1>
+    <p class="intro">Acceso exclusivo para personal autorizado.</p>
+
+    <section id="login-panel" class="panel">
+      <h2>Ingreso del operador</h2>
+      <form id="login-form">
+        <label for="email">Correo autorizado</label>
+        <input id="email" type="email" autocomplete="username" required>
+        <label for="password">Contraseña</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+        <button type="submit">Iniciar sesión</button>
+      </form>
+      <p id="login-message" class="message" role="status"></p>
+    </section>
+
+    <section id="scanner-panel" class="panel" hidden>
+      <div class="operator-row">
+        <span id="operator-email"></span>
+        <button id="logout-button" class="secondary" type="button">Cerrar sesión</button>
+      </div>
+      <h2>Escanear código QR</h2>
+      <div id="qr-reader"></div>
+      <p id="scan-message" class="message" role="status">Permite el acceso a la cámara para comenzar.</p>
+      <button id="manual-button" class="secondary" type="button">Ingresar código manualmente</button>
+      <form id="manual-form" hidden>
+        <label for="manual-token">Contenido del QR</label>
+        <input id="manual-token" type="text" autocomplete="off">
+        <button type="submit">Validar boleta</button>
+      </form>
+    </section>
+    <p class="footnote">Una boleta aceptada queda marcada como utilizada. No escanees códigos de prueba o de asistentes reales durante la configuración.</p>
+  </main>
+  <script src="js/checkin.js"></script>
+</body>
+</html>
