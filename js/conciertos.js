@@ -27,7 +27,13 @@ if (menuToggle && nav) {
     const emailField = document.querySelector("#buyer-email");
     const quantityField = document.querySelector("#ticket-quantity");
 
-    const LOCAL_TEST_ORIGIN = window.location.origin === "http://localhost:5500";
+    const LOCAL_TEST_ORIGINS = new Set([
+        "http://localhost:5500",
+        "http://localhost:5501",
+        "http://127.0.0.1:5500",
+        "http://127.0.0.1:5501"
+    ]);
+    const LOCAL_TEST_ORIGIN = LOCAL_TEST_ORIGINS.has(window.location.origin);
     const API_URL = "https://gphizrvkvxfywttysnfj.supabase.co/functions/v1/create-ticket-order";
 
     if (!LOCAL_TEST_ORIGIN) {
