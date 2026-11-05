@@ -13,8 +13,7 @@ if (menuToggle && nav) {
 }
 
 //==================================================
-// BOLETERÍA — PRUEBA LOCAL AISLADA
-// La venta pública permanece deshabilitada.
+// BOLETERÍA — CHECKOUT WOMPI PRODUCCIÓN
 //==================================================
 
 (() => {
@@ -27,35 +26,44 @@ if (menuToggle && nav) {
     const emailField = document.querySelector("#buyer-email");
     const quantityField = document.querySelector("#ticket-quantity");
 
-    const LOCAL_TEST_ORIGINS = new Set([
-        "http://localhost:5500",
-        "http://localhost:5501",
-        "http://127.0.0.1:5500",
-        "http://127.0.0.1:5501"
-    ]);
-    const LOCAL_TEST_ORIGIN = LOCAL_TEST_ORIGINS.has(window.location.origin);
     const API_URL = "https://gphizrvkvxfywttysnfj.supabase.co/functions/v1/create-ticket-order";
+    const ALLOWED_ORIGINS = new Set([
+        "https://perrosolar.com",
+        "https://www.perrosolar.com"
+    ]);
 
-    if (!LOCAL_TEST_ORIGIN) {
-        if (status) status.textContent = "La preventa pública permanece deshabilitada mientras terminamos las pruebas de seguridad y pagos.";
+    // Mantener en false hasta verificar webhook, correo y una compra controlada.
+    const PUBLIC_SALES_ENABLED = false;
+
+    function message(text, isError = false) {
+        if (!status) return;
+        status.textContent = text;
+        status.dataset.state = isError ? "error" : "info";
+    }
+
+    if (!ALLOWED_ORIGINS.has(window.location.origin)) {
+        message("La compra solo está disponible desde el sitio oficial de Perro Solar.", true);
+        return;
+    }
+
+    if (!PUBLIC_SALES_ENABLED) {
+        message("La preventa estará disponible próximamente. Estamos finalizando las verificaciones de pago y emisión de boletas.");
+        return;
+    }
+
+    if (!form.reportValidity || !button || !status || !nameField || !emailField || !quantityField) {
+        console.error("No se encontró la estructura completa del formulario de preventa.");
         return;
     }
 
     [nameField, emailField, quantityField, button].forEach((element) => {
-        if (element) element.disabled = false;
+        element.disabled = false;
     });
 
-    button.textContent = "PROBAR COMPRA · SANDBOX";
-    button.classList.add("is-test-ready");
-    status.textContent = "ENTORNO LOCAL DE PRUEBAS. Se creará una reserva del evento técnico y se abrirá Wompi Sandbox.";
+    button.textContent = "COMPRAR ENTRADAS";
 
     let requestInProgress = false;
     let idempotencyKey = null;
-
-    function message(text, isError = false) {
-        status.textContent = text;
-        status.dataset.state = isError ? "error" : "info";
-    }
 
     function hidden(formElement, name, value) {
         const input = document.createElement("input");
@@ -67,7 +75,6 @@ if (menuToggle && nav) {
 
     function openWompiCheckout(data, buyerName, buyerEmail) {
         const checkout = data.checkout;
-
         const required = [
             "public_key",
             "currency",
@@ -109,13 +116,13 @@ if (menuToggle && nav) {
         const turnstileToken = window.turnstile?.getResponse?.();
 
         if (!turnstileToken) {
-            message("Completa la verificación de Cloudflare antes de continuar.", true);
+            message("Completa la verificación de seguridad antes de continuar.", true);
             return;
         }
 
         if (!idempotencyKey) {
             if (!window.crypto?.randomUUID) {
-                message("Este navegador no permite generar una clave segura para la solicitud.", true);
+                message("Este navegador no permite generar una clave segura para la compra.", true);
                 return;
             }
             idempotencyKey = window.crypto.randomUUID();
@@ -123,8 +130,8 @@ if (menuToggle && nav) {
 
         requestInProgress = true;
         button.disabled = true;
-        button.textContent = "PREPARANDO RESERVA…";
-        message("Validando la solicitud y creando la reserva de prueba…");
+        button.textContent = "PREPARANDO COMPRA…";
+        message("Validando tus datos y reservando las entradas…");
 
         try {
             const response = await fetch(API_URL, {
@@ -141,17 +148,24 @@ if (menuToggle && nav) {
 
             const data = await response.json().catch(() => ({}));
             if (!response.ok) {
-                throw new Error(data.error || data.message || "El servidor rechazó la solicitud (HTTP " + response.status + ").");
+                throw new Error(data.error || data.message || "No fue posible iniciar la compra (HTTP " + response.status + ").");
             }
 
+            message("Reserva creada. Abriendo el pago seguro de Wompi…");
             openWompiCheckout(data, buyerName, buyerEmail);
         } catch (error) {
-            console.error("Error en la prueba de boletería:", error);
-            message(error.message || "No fue posible iniciar la prueba.", true);
+            console.error("Error en la compra de boletería:", error);
+            message(error.message || "No fue posible iniciar la compra. Inténtalo nuevamente.", true);
             requestInProgress = false;
             button.disabled = false;
-            button.textContent = "REINTENTAR · SANDBOX";
+            button.textContent = "REINTENTAR COMPRA";
             if (window.turnstile?.reset) window.turnstile.reset();
+
+            // Una respuesta 409 puede indicar una reserva anterior vencida.
+            // La siguiente solicitud debe tener una nueva clave de idempotencia.
+            if (error.message?.includes("reserva") || error.message?.includes("orden")) {
+                idempotencyKey = null;
+            }
         }
     });
 })();
