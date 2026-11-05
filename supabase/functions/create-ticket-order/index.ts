@@ -244,15 +244,22 @@ const supabase = createClient(
   serviceRoleKey
 );
 
+const wompiEnvironment = Deno.env.get("WOMPI_ENVIRONMENT")?.trim() || "prod";
 const publicKey = Deno.env.get("WOMPI_PUBLIC_KEY")?.trim();
 const integritySecret = Deno.env.get("WOMPI_INTEGRITY_SECRET")?.trim();
+
+if (!["test", "prod"].includes(wompiEnvironment)) {
+  throw new Error("WOMPI_ENVIRONMENT debe ser test o prod.");
+}
 
 if (!publicKey) {
   throw new Error("Falta el Secret WOMPI_PUBLIC_KEY.");
 }
 
-if (!publicKey.startsWith("pub_prod_")) {
-  throw new Error("WOMPI_PUBLIC_KEY no corresponde a Producción.");
+const expectedPublicKeyPrefix = `pub_${wompiEnvironment}_`;
+
+if (!publicKey.startsWith(expectedPublicKeyPrefix)) {
+  throw new Error(`WOMPI_PUBLIC_KEY no corresponde al ambiente ${wompiEnvironment}.`);
 }
 
 if (!integritySecret) {
