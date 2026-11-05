@@ -270,3 +270,26 @@
 @media (max-width: 760px) {
     .presale-form { width: 100%; }
 }
+
+
+/* Afiche oficial del evento en la tarjeta de boletería */
+.presale-aside {
+    padding: 0;
+    overflow: hidden;
+    background: #090909;
+}
+.presale-event-poster {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    object-fit: contain;
+    object-position: center;
+}
+@media (max-width: 760px) {
+    .presale-event-poster {
+        min-height: 0;
+        max-height: 620px;
+        object-fit: contain;
+    }
+}
