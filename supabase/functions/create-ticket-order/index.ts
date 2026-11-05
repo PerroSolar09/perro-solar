@@ -20,7 +20,7 @@ const allowedHostnames = new Set([
     "127.0.0.1"
 ]);
 
-const EVENT_SLUG = "prueba-tecnica-perro-solar";
+const EVENT_SLUG = "perro-solar-la-estacion-2026-11-21";
 const WOMPI_CHECKOUT_URL = "https://checkout.wompi.co/p/";
 
 function jsonResponse(
