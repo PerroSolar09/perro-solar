@@ -293,3 +293,276 @@
         object-fit: contain;
     }
 }
+
+
+/*====================================================
+  VISTA UNICA DE COMPRA — CONCIERTO 21 NOV 2026
+  La sección de evento y el formulario se presentan
+  en una sola pantalla, sin duplicar información.
+=====================================================*/
+
+@media (min-width: 761px) {
+    /* La información del concierto ya está integrada en la tarjeta */
+    body:has(.presale-section) .concerts {
+        display: none;
+    }
+
+    body:has(.presale-section) main {
+        min-height: calc(100svh - 95px);
+        margin-top: 55px;
+    }
+
+    .presale-section {
+        min-height: calc(100svh - 150px);
+        display: flex;
+        align-items: center;
+        padding: 18px 28px 24px;
+    }
+
+    .presale-container {
+        max-width: 1240px;
+    }
+
+    .presale-eyebrow {
+        margin-bottom: 12px;
+        font-size: .68rem;
+        letter-spacing: 3.5px;
+    }
+
+    .presale-card {
+        grid-template-columns: minmax(250px, .72fr) minmax(0, 1.28fr);
+        align-items: stretch;
+        max-height: 690px;
+        overflow: hidden;
+    }
+
+    .presale-aside {
+        order: 0;
+        min-height: 0;
+        padding: 18px;
+        border-left: 0;
+        border-right: 1px solid rgba(181, 130, 35, .32);
+    }
+
+    .presale-event-poster {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        max-height: 650px;
+        object-fit: contain;
+    }
+
+    .presale-copy {
+        order: 1;
+        padding: clamp(20px, 2.4vw, 34px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .presale-kicker {
+        margin-bottom: 8px;
+        font-size: .65rem;
+    }
+
+    .presale-copy h2 {
+        font-size: clamp(1.45rem, 2.3vw, 2.15rem);
+        line-height: 1.12;
+    }
+
+    .presale-description {
+        margin: 9px 0 14px;
+        font-size: .84rem;
+        line-height: 1.45;
+    }
+
+    .presale-details {
+        margin-bottom: 14px;
+    }
+
+    .presale-details li {
+        grid-template-columns: 120px 1fr;
+        gap: 12px;
+        padding: 8px 0;
+        font-size: .82rem;
+    }
+
+    .presale-price {
+        font-size: 1.05rem;
+    }
+
+    .presale-price small {
+        display: inline;
+        margin-left: 5px;
+    }
+
+    .presale-form {
+        max-width: none;
+        margin-top: 4px;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 14px;
+        row-gap: 6px;
+    }
+
+    .presale-form label {
+        margin-top: 4px;
+        font-size: .62rem;
+    }
+
+    .presale-form input,
+    .presale-form select {
+        min-height: 39px;
+        padding: 8px 10px;
+        font-size: .84rem;
+    }
+
+    .presale-form label[for="ticket-quantity"],
+    .presale-form #ticket-quantity,
+    .presale-form .cf-turnstile,
+    .presale-form .presale-button {
+        grid-column: 1 / -1;
+    }
+
+    .presale-form .cf-turnstile {
+        margin-top: 5px;
+    }
+
+    .presale-button {
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 16px;
+    }
+
+    .presale-status {
+        margin-top: 8px;
+        font-size: .69rem;
+        line-height: 1.35;
+    }
+}
+
+@media (max-width: 760px) {
+    body:has(.presale-section) .concerts {
+        display: none;
+    }
+
+    body:has(.presale-section) main {
+        margin-top: 75px;
+    }
+
+    .presale-section {
+        padding: 18px 14px 28px;
+    }
+
+    .presale-eyebrow {
+        margin-bottom: 10px;
+        font-size: .62rem;
+        letter-spacing: 2.5px;
+    }
+
+    .presale-card {
+        grid-template-columns: 1fr;
+    }
+
+    .presale-aside {
+        order: 0;
+        min-height: 0;
+        max-height: 190px;
+        padding: 10px;
+        border: 0;
+        border-bottom: 1px solid rgba(181, 130, 35, .32);
+    }
+
+    .presale-event-poster {
+        width: auto;
+        height: 170px;
+        min-height: 0;
+        max-height: 170px;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    .presale-copy {
+        order: 1;
+        padding: 18px 16px 20px;
+    }
+
+    .presale-kicker {
+        margin-bottom: 6px;
+        font-size: .61rem;
+    }
+
+    .presale-copy h2 {
+        font-size: 1.45rem;
+    }
+
+    .presale-description {
+        margin: 8px 0 12px;
+        font-size: .82rem;
+        line-height: 1.45;
+    }
+
+    .presale-details {
+        margin-bottom: 12px;
+    }
+
+    .presale-details li {
+        grid-template-columns: 95px 1fr;
+        gap: 8px;
+        padding: 7px 0;
+        font-size: .78rem;
+    }
+
+    .presale-price {
+        font-size: 1rem;
+    }
+
+    .presale-form {
+        margin-top: 8px;
+        gap: 7px;
+    }
+
+    .presale-form label {
+        margin-top: 4px;
+        font-size: .62rem;
+    }
+
+    .presale-form input,
+    .presale-form select {
+        min-height: 42px;
+    }
+
+    .presale-button {
+        width: 100%;
+        min-height: 46px;
+    }
+
+    .presale-status {
+        font-size: .7rem;
+        line-height: 1.4;
+    }
+}
+
+@media (max-height: 760px) and (min-width: 761px) {
+    .presale-section {
+        padding-top: 10px;
+        padding-bottom: 12px;
+    }
+
+    .presale-card {
+        max-height: calc(100svh - 185px);
+    }
+
+    .presale-copy {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .presale-description {
+        margin-top: 6px;
+        margin-bottom: 9px;
+    }
+
+    .presale-details li {
+        padding: 6px 0;
+    }
+}
