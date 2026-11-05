@@ -68,9 +68,16 @@ Deno.serve(async (req) => {
     // 3. CONFIGURACIÓN
     // =================================================
 
+    const wompiEnvironment = Deno.env.get("WOMPI_ENVIRONMENT")?.trim() || "prod";
     const eventsSecret = Deno.env.get("WOMPI_EVENTS_SECRET");
     const privateKey = Deno.env.get("WOMPI_PRIVATE_KEY");
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
+
+    if (!["test", "prod"].includes(wompiEnvironment)) {
+      return response(500, {
+        error: "WOMPI_ENVIRONMENT debe ser test o prod",
+      });
+    }
     const secretKeysRaw = Deno.env.get("SUPABASE_SECRET_KEYS");
     const legacyServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
     const emailInternalSecret = Deno.env.get("TICKET_EMAIL_INTERNAL_SECRET");
@@ -109,7 +116,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    if (event.environment !== "prod") {
+    if (event.environment !== wompiEnvironment) {
       return response(400, {
         error: "Ambiente no permitido",
       });
@@ -198,8 +205,12 @@ Deno.serve(async (req) => {
     // 7. VERIFICAR TRANSACCIÓN DIRECTAMENTE EN WOMPI
     // =================================================
 
+    const wompiApiBase = wompiEnvironment === "test"
+      ? "https://sandbox.wompi.co/v1"
+      : "https://production.wompi.co/v1";
+
     const wompiResponse = await fetch(
-      `https://production.wompi.co/v1/transactions/${encodeURIComponent(transactionId)}`,
+      `${wompiApiBase}/transactions/${encodeURIComponent(transactionId)}`,
       {
         method: "GET",
         headers: {
