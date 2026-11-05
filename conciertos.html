@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/conciertos.css">
+    <link rel="stylesheet" href="css/boleteria.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -111,8 +112,8 @@
                 <div class="concert-poster">
 
                     <img
-                        src="images/flyers/festivalroackalpueblo.webp"
-                        alt="Perro Solar en el Festival Rock al Pueblo - Domingo 01 de noviembre de 2026">
+                        src="images/flyers/LaEstacion_21_Noviembre_2026.webp"
+                        alt="Afiche oficial de Perro Solar en La Estación Rock and Roll, sábado 21 de noviembre de 2026">
 
                 </div>
 
@@ -125,13 +126,13 @@
                     <div class="event-date">
 
                         <span class="date-day">
-                            01
+                            21
                         </span>
 
                         <div class="date-text">
 
                             <span>
-                                DOMINGO
+                                SÁBADO
                             </span>
 
                             <span>
@@ -144,7 +145,7 @@
 
 
                     <div class="event-time">
-                        Desde las 12:00 PM
+                        9:00 PM
                     </div>
 
 
@@ -158,30 +159,24 @@
                         </span>
 
                         <h1>
-                            Parque Principal de La Mesa
+                            La Estación Rock and Roll
                         
                         </h1>
 
                         <p>
-                            Calle 9 # 22 - 84 
-                            <br>
-                            La Mesa, Cundinamarca
+                            Calle 132 #102-10<br>Bogotá, Colombia
                         </p>
 
 
                         <a
-                            href="https://maps.app.goo.gl/ZbxijTLz8A9pmwPo7"
+                            href="https://maps.app.goo.gl/izGrEkuuwdkvPyyg9"
                             class="maps-link"
                             target="_blank"
-                            rel="noopener noreferrer">
+                            rel="noopener noreferrer"
+                            aria-label="Cómo llegar a La Estación Rock and Roll en Google Maps">
 
-                            <span>
-                                Ver ubicación
-                            </span>
-
-                            <span class="maps-arrow">
-                                →
-                            </span>
+                            <span>Ver ubicación en Google Maps</span>
+                            <span class="maps-arrow" aria-hidden="true">→</span>
 
                         </a>
 
@@ -191,7 +186,7 @@
                     <div class="free-entry">
 
                         <span>
-                            ENTRADA LIBRE
+                            BOLETERÍA EN PREPARACIÓN
                         </span>
 
                     </div>
@@ -209,6 +204,54 @@
     </section>
 
 
+
+    <!-- PREVENTA PERRO SOLAR · 21 NOVIEMBRE 2026 -->
+    <section class="presale-section" aria-labelledby="presale-title">
+        <div class="presale-container">
+            <div class="presale-eyebrow">BOLETERÍA OFICIAL · PERRO SOLAR</div>
+            <div class="presale-card">
+                <div class="presale-copy">
+                    <p class="presale-kicker">PRÓXIMA FECHA</p>
+                    <h2 id="presale-title">Una noche de rock en vivo</h2>
+                    <p class="presale-description">Acompáñanos en La Estación Rock and Roll. Asegura tu lugar comprando tu entrada anticipada cuando se habilite la venta.</p>
+                    <ul class="presale-details">
+                        <li><span class="presale-label">FECHA</span><span>Sábado 21 de noviembre de 2026</span></li>
+                        <li><span class="presale-label">LUGAR</span><span>La Estación Rock and Roll · Bogotá</span></li>
+                        <li class="presale-address-row"><span class="presale-label">DIRECCIÓN</span><span>Calle 132 #102-10, Bogotá<br><a class="presale-map-link" href="https://maps.app.goo.gl/izGrEkuuwdkvPyyg9" target="_blank" rel="noopener noreferrer">Ver ubicación en Google Maps <span aria-hidden="true">↗</span></a></span></li>
+                        <li><span class="presale-label">PREVENTA</span><span class="presale-price">$10.000 COP <small>por entrada</small></span></li>
+                        
+                    </ul>
+                    <form id="presale-form" class="presale-form">
+                        <label for="buyer-name">NOMBRE COMPLETO</label>
+                        <input id="buyer-name" name="buyer_name" type="text" minlength="2" maxlength="120" autocomplete="name" required disabled>
+
+                        <label for="buyer-email">CORREO ELECTRÓNICO</label>
+                        <input id="buyer-email" name="buyer_email" type="email" maxlength="254" autocomplete="email" required disabled>
+
+                        <label for="ticket-quantity">CANTIDAD DE ENTRADAS</label>
+                        <select id="ticket-quantity" name="quantity" required disabled>
+                            <option value="1">1 entrada</option>
+                            <option value="2">2 entradas</option>
+                            <option value="3">3 entradas</option>
+                            <option value="4">4 entradas</option>
+                            <option value="5">5 entradas</option>
+                        </select>
+
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFxOwmR3eEPRBoDd" data-theme="dark"></div>
+                        <button class="presale-button" id="presale-submit" type="submit" disabled>PREVENTA EN PREPARACIÓN</button>
+                    </form>
+                    <p class="presale-status" id="presale-status" role="status" aria-live="polite">La venta pública permanece deshabilitada. El formulario solo se habilita en pruebas locales.</p>
+                </div>
+                <div class="presale-aside">
+                    <img
+                        class="presale-event-poster"
+                        src="images/flyers/LaEstacion_21_Noviembre_2026.webp"
+                        alt="Afiche oficial del concierto de Perro Solar en La Estación Rock and Roll">
+                </div>
+            </div>
+        </div>
+    </section>
+
 </main>
 
 
@@ -223,7 +266,7 @@
 
 <script src="js/conciertos.js"></script>
 
-
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </body>
 
 </html>
