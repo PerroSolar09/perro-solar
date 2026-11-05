@@ -251,8 +251,8 @@ if (!publicKey) {
   throw new Error("Falta el Secret WOMPI_PUBLIC_KEY.");
 }
 
-if (!publicKey.startsWith("pub_test_")) {
-  throw new Error("WOMPI_PUBLIC_KEY no corresponde a Sandbox.");
+if (!publicKey.startsWith("pub_prod_")) {
+  throw new Error("WOMPI_PUBLIC_KEY no corresponde a Producción.");
 }
 
 if (!integritySecret) {
