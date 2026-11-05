@@ -199,7 +199,7 @@ Deno.serve(async (req) => {
     // =================================================
 
     const wompiResponse = await fetch(
-      `https://sandbox.wompi.co/v1/transactions/${encodeURIComponent(transactionId)}`,
+      `https://production.wompi.co/v1/transactions/${encodeURIComponent(transactionId)}`,
       {
         method: "GET",
         headers: {
