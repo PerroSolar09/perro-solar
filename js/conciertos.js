@@ -32,8 +32,10 @@ if (menuToggle && nav) {
         "https://www.perrosolar.com"
     ]);
 
-    // Mantener en false hasta verificar webhook, correo y una compra controlada.
+    // Las ventas públicas permanecen cerradas.
+    // El checkout solo puede probarse desde localhost mientras se usa Wompi Sandbox.
     const PUBLIC_SALES_ENABLED = false;
+    const IS_LOCAL_TEST = ["localhost", "127.0.0.1"].includes(window.location.hostname);
 
     function message(text, isError = false) {
         if (!status) return;
@@ -46,9 +48,13 @@ if (menuToggle && nav) {
         return;
     }
 
-    if (!PUBLIC_SALES_ENABLED) {
+    if (!PUBLIC_SALES_ENABLED && !IS_LOCAL_TEST) {
         message("La preventa estará disponible próximamente. Estamos finalizando las verificaciones de pago y emisión de boletas.");
         return;
+    }
+
+    if (IS_LOCAL_TEST) {
+        message("MODO DE PRUEBA LOCAL: utiliza únicamente las credenciales de Wompi Sandbox. No se reciben pagos reales.");
     }
 
     if (!form.reportValidity || !button || !status || !nameField || !emailField || !quantityField) {
