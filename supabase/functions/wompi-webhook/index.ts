@@ -109,7 +109,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    if (event.environment !== "test") {
+    if (event.environment !== "prod") {
       return response(400, {
         error: "Ambiente no permitido",
       });
