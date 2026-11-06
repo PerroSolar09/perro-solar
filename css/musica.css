@@ -413,3 +413,46 @@ MÚSICA · MOBILE
     }
 
 }
+
+/*==============================
+PLATAFORMAS DIGITALES
+==============================*/
+
+.music-platforms{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    margin:35px auto 0;
+}
+
+.music-platforms a{
+    display:inline-block;
+    padding:15px 25px;
+    border:1px solid var(--dorado);
+    border-radius:40px;
+    color:var(--blanco);
+    font-size:.75rem;
+    font-weight:600;
+    letter-spacing:1.5px;
+    text-decoration:none;
+    transition:background .3s ease, color .3s ease, transform .3s ease;
+}
+
+.music-platforms a:hover{
+    background:var(--dorado);
+    color:#111;
+    transform:translateY(-3px);
+}
+
+@media(max-width:480px){
+    .music-platforms{
+        flex-direction:column;
+        gap:12px;
+    }
+    .music-platforms a{
+        width:100%;
+        max-width:290px;
+    }
+}
