@@ -33,7 +33,7 @@ if (menuToggle && nav) {
     ]);
 
     // La venta pública se habilita tras validar el flujo completo de compra y check-in.
-    const PUBLIC_SALES_ENABLED = false;
+    const PUBLIC_SALES_ENABLED = true;
 
     function message(text, isError = false) {
         if (!status) return;
