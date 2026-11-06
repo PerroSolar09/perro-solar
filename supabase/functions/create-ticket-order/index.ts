@@ -21,6 +21,7 @@ const allowedHostnames = new Set([
 ]);
 
 const EVENT_SLUG = "perro-solar-la-estacion-2026-11-21";
+const CONTROLLED_PURCHASE_EMAIL = "sebasbolivar91@gmail.com";
 const WOMPI_CHECKOUT_URL = "https://checkout.wompi.co/p/";
 
 function jsonResponse(
@@ -182,6 +183,14 @@ Deno.serve(async (req) => {
       );
     }
 
+    if (email !== CONTROLLED_PURCHASE_EMAIL) {
+      return jsonResponse(
+        403,
+        { error: "Esta compra inicial está habilitada únicamente para el correo autorizado." },
+        corsHeaders,
+      );
+    }
+
     if (
       email.length < 5 ||
       email.length > 254 ||
@@ -197,11 +206,11 @@ Deno.serve(async (req) => {
     if (
       !Number.isInteger(quantity) ||
       quantity < 1 ||
-      quantity > 10
+      quantity > 1
     ) {
       return jsonResponse(
         400,
-        { error: "Cantidad inválida. Máximo 10 entradas." },
+        { error: "Para esta compra controlada solo se permite 1 entrada." },
         corsHeaders,
       );
     }
