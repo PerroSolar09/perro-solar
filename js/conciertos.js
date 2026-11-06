@@ -33,7 +33,7 @@ if (menuToggle && nav) {
     ]);
 
     // La venta pública se habilita tras validar el flujo completo de compra y check-in.
-    const PUBLIC_SALES_ENABLED = true;
+    const PUBLIC_SALES_ENABLED = false;
 
     function message(text, isError = false) {
         if (!status) return;
@@ -47,7 +47,11 @@ if (menuToggle && nav) {
     }
 
     if (!PUBLIC_SALES_ENABLED) {
-        message("La preventa estará disponible próximamente. Estamos finalizando las verificaciones de pago y emisión de boletas.");
+        [nameField, emailField, quantityField, button].forEach((element) => {
+            if (element) element.disabled = true;
+        });
+        if (button) button.textContent = "VENTA TEMPORALMENTE CERRADA";
+        message("La venta de entradas está temporalmente suspendida mientras actualizamos y verificamos las credenciales de pago. Próximamente estará disponible nuevamente.");
         return;
     }
 
