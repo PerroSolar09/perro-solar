@@ -32,8 +32,8 @@ if (menuToggle && nav) {
         "https://www.perrosolar.com"
     ]);
 
-    // Mantener en false hasta verificar webhook, correo y una compra controlada.
-    const PUBLIC_SALES_ENABLED = false;
+    // La venta pública se habilita tras validar el flujo completo de compra y check-in.
+    const PUBLIC_SALES_ENABLED = true;
 
     function message(text, isError = false) {
         if (!status) return;
