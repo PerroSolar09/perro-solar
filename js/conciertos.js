@@ -142,6 +142,7 @@ if (menuToggle && nav) {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
+                    event_slug: form.dataset.eventSlug || "perro-solar-la-estacion-2026-11-21",
                     buyer_name: buyerName,
                     buyer_email: buyerEmail,
                     quantity,
