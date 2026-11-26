@@ -189,30 +189,52 @@ Deno.serve(async (req) => {
       </div>
     `).join("");
 
+    const eventPosterUrl = "https://perrosolar.com/images/flyers/LaEstacion_21_Noviembre_2026.webp";
+    const totalPaid = Number(order.total_cop);
+    const paidLabel = Number.isFinite(totalPaid) && totalPaid > 0
+      ? totalPaid.toLocaleString("es-CO")
+      : (tickets.length * 10000).toLocaleString("es-CO");
+
     const htmlBody = `
-      <div style="background:#111;color:#eee;padding:30px;font-family:Arial,sans-serif">
+      <div style="background:#111;color:#eee;padding:30px 18px;font-family:Arial,sans-serif">
         <div style="max-width:600px;margin:auto">
-          <h1 style="color:#c9a44c;text-align:center;font-family:Georgia,serif">
+          <h1 style="color:#c9a44c;text-align:center;font-family:Georgia,serif;letter-spacing:2px">
             PERRO SOLAR
           </h1>
 
-          <h2 style="text-align:center">Tus boletas están listas</h2>
+          <div style="text-align:center;margin:8px auto 22px">
+            <img
+              src="${eventPosterUrl}"
+              alt="Afiche del concierto de Perro Solar"
+              width="160"
+              style="display:block;width:30%;max-width:160px;min-width:110px;height:auto;margin:0 auto;border:1px solid #8d7135"
+            />
+          </div>
+
+          <h2 style="color:#eee;text-align:center;font-family:Georgia,serif;font-weight:normal">
+            Tu entrada está confirmada
+          </h2>
 
           <p>Hola ${safeBuyerName},</p>
+          <p>Tu pago fue confirmado. Esta es tu entrada para Perro Solar en La Estación Rock and Roll.</p>
 
-          <p>
-            Tu pago fue confirmado. Estas son tus entradas para
-            Perro Solar en La Estación Rock and Roll.
-          </p>
+          <div style="border-top:1px solid #8d7135;border-bottom:1px solid #8d7135;padding:16px 4px;margin:20px 0;text-align:center">
+            <p style="margin:5px 0;color:#c9a44c;font-size:17px">SÁBADO 21 DE NOVIEMBRE DE 2026 · 9:00 PM</p>
+            <p style="margin:7px 0;color:#eee">La Estación Rock and Roll</p>
+            <p style="margin:5px 0;color:#bbb">Calle 132 #102-10 · Bogotá, Colombia</p>
+            <p style="margin:12px 0">
+              <a href="https://maps.app.goo.gl/izGrEkuuwdkvPyyg9" style="color:#c9a44c;text-decoration:underline">Ver ubicación en Google Maps</a>
+            </p>
+            <p style="margin:10px 0 0;color:#c9a44c">Valor pagado: $${paidLabel} COP</p>
+          </div>
 
           ${htmlTickets}
 
-          <p style="text-align:center;color:#c9a44c">
-            Sábado 21 de noviembre de 2026
+          <p style="text-align:center;color:#c9a44c;font-size:14px">
+            Presenta este código QR en la entrada. Cada QR permite un solo ingreso.
           </p>
-
-          <p style="text-align:center;color:#aaa;font-size:12px">
-            Conserva este correo y presenta cada código QR al ingresar.
+          <p style="text-align:center;color:#aaa;font-size:12px;margin-top:24px">
+            Conserva este correo y presenta tu código QR al ingresar.
           </p>
         </div>
       </div>
