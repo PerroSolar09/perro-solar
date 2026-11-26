@@ -1,3 +1,9 @@
+// Mostrar primero el concierto más reciente y terminar con el más antiguo.
+const eventsContainer = document.querySelector(".events");
+if (eventsContainer) {
+    [...eventsContainer.children].reverse().forEach((card) => eventsContainer.appendChild(card));
+}
+
 const posters = document.querySelectorAll(".event-poster");
 
 const lightbox = document.querySelector(".lightbox");
