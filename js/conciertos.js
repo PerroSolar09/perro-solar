@@ -33,7 +33,7 @@ if (menuToggle && nav) {
     ]);
 
     // La venta pública se habilita tras validar el flujo completo de compra y check-in.
-    const PUBLIC_SALES_ENABLED = true;
+    const PUBLIC_SALES_ENABLED = false;
 
     function message(text, isError = false) {
         if (!status) return;
@@ -51,7 +51,7 @@ if (menuToggle && nav) {
             if (element) element.disabled = true;
         });
         if (button) button.textContent = "VENTA TEMPORALMENTE CERRADA";
-        message("La venta de entradas está temporalmente suspendida mientras actualizamos y verificamos las credenciales de pago. Próximamente estará disponible nuevamente.");
+        message("La preventa para Happy Christmas Fest se habilitará próximamente. Estamos terminando las pruebas de pago y emisión de entradas.");
         return;
     }
 
@@ -142,6 +142,7 @@ if (menuToggle && nav) {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
+                    event_slug: form.dataset.eventSlug || "perro-solar-la-estacion-2026-11-21",
                     buyer_name: buyerName,
                     buyer_email: buyerEmail,
                     quantity,
